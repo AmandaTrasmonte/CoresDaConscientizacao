@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+:root {
+    --bg-site: #fafafa;
+    --rosa: #ff63a5;
+    --laranja: #ff8b43;
+    --azul: #6bb0ff;
+    --dourado: #ffc469;
+    --roxo: #7e57c2;
+    --negro: #111111;
+    --verde: #2fbf71;
+
+    --fonte-titulo: 'Berkshire Swash', serif;
+    --fonte-texto: 'Times New Roman', serif;
+}
+
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    background: var(--bg-site);
+    font-family: var(--fonte-texto);
+    color: #333;
+}
+
+body {
+    padding-top: 160px; /* espaço pro header fixo */
+}
+
+/* HEADER FIXO */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 25px 0 15px;
+    background: linear-gradient(to right, #ff3054, #ff63a5, #ff8b43, #6bb0ff);
+    z-index: 4000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: top 0.35s ease;
+}
+
+header a {
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
+
+header .logo {
+    width: 320px;
+    display: block;
+    margin: 0 auto;
+}
+
+header.hide { top: -200px; }
+
+/* Checkbox invisível */
+#menu-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ================================
+   HAMBÚRGUER — 3 LINHAS SEMPRE
+   Branco fechado → Preto aberto
+   NÃO vira X
+================================ */
+header > label.hamburger {
+    position: absolute;
+    right: 25px;
+    top: 45px;
+    width: 40px;
+    height: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 5000;
+}
+
+header label.hamburger span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: #fff; /* FECHADO = branco */
+    border-radius: 2px;
+    transition: background 0.25s ease;
+}
+
+/* Quando abre o menu (CASO ATIVO) → barras pretas */
+#menu-toggle:checked + label.hamburger span {
+    background: #000; /* ABERTO = preto */
+}
+
+/* ================================
+   MENU LATERAL — igual ao index
+================================ */
+header nav {
+    position: fixed !important;
+    right: -280px;
+    top: 0 !important;
+    height: 100vh;
+    width: 280px;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.15);
+    transition: right 0.3s ease;
+    padding: 24px 20px;
+    z-index: 4200;
+    overflow-y: auto;
+}
+
+#menu-toggle:checked ~ nav { right: 0; }
+
+header nav .menu {
+    list-style: none;
+}
+
+header nav .menu > li {
+    margin-bottom: 18px;
+}
+
+header nav .menu > li > a,
+header nav details summary {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 8px;
+    border-radius: 8px;
+    color: #111 !important;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+header nav .menu > li > a:hover,
+header nav details summary:hover {
+    background: #f5f5f5;
+}
+
+/* SUBLISTAS */
+header nav details ul {
+    list-style: none;
+    margin-top: 8px;
+    padding-left: 10px;
+}
+
+header nav details ul li {
+    margin: 8px 0;
+}
+
+header nav details ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    display: block;
+    transition: background 0.2s ease;
+}
+
+header nav details ul li a:hover {
+    background: #f0f0f0;
+    color: #000;
+}
+
+/* ================================
+   SETINHAS ▼ → ▲ DOS <details>
+   IGUAL AO INDEX
+================================ */
+details summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    padding-left: 22px;
+}
+
+details summary::before {
+    content: "▼";
+    font-size: 15px;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    transition: transform 0.25s ease;
+}
+
+details[open] summary::before {
+    transform: rotate(180deg);
+}
+
+/* cores dos links */
+header nav a[href*="outubro"]          { color: var(--rosa); }
+header nav a[href*="novembro_azul"]    { color: var(--azul); }
+header nav a[href*="novembro_dourado"] { color: var(--dourado); }
+header nav a[href*="novroxo"]          { color: var(--roxo); }
+header nav a[href*="novnegro"]         { color: var(--negro); }
+header nav a[href*="dezembro_laranja"] { color: var(--laranja); }
+header nav a[href*="dezverde"]         { color: var(--verde); }
+header nav a[href*="dezembro_vermelho"]{ color: red; }
+
+
+/* Barra de tópicos mais próxima do header */
+.topicos {
+    position: fixed;
+    top: 150px; /* 10px mais pra cima que antes */
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 12px 0;
+    z-index: 3999;
+    transition: top 0.35s ease;
+}
+
+
+header.hide + .topicos {
+    top: -200px;
+}
+
+.topicos ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.topicos ul li a {
+    font-family: var(--fonte-titulo);
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--azul);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.topicos ul li a:hover {
+    background: var(--azul);
+    color: white;
+}
+
+/* ================================
+   TÍTULO PRINCIPAL
+================================ */
+.titulo-principal {
+    font-family: var(--fonte-titulo);
+    font-size: 52px;
+    color: var(--azul);
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 130px auto 40px;
+    padding: 0 20px;
+    max-width: 1000px;
+    line-height: 1.2;
+}
+
+/* ================================
+   BOXES
+================================ */
+.box {
+    background: white;
+    max-width: 900px;
+    margin: 0 auto 35px;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    transform: translateY(30px);
+    animation: subir 0.8s ease-out forwards;
+}
+
+@keyframes subir {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Primeiro box (#sobre) um pouco mais para baixo */
+#sobre {
+    margin-top: 50px; /* aumenta conforme necessário */
+}
+
+.box h1 { font-family: var(--fonte-titulo); text-align: center; margin-bottom: 18px; color: var(--azul); }
+
+.box p, .box li { font-size: 19px; line-height: 1.6; }
+
+/* ================================
+   IMAGENS DAS ODS
+================================ */
+#ods img {
+    display: inline-block;
+    margin: 0 10px;
+    width: 120px;
+}
+
+/* Mantido todo o CSS original acima... */
+
+.box {
+    background: white;
+    max-width: 900px;
+    margin: 0 auto 35px;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: subir 0.8s ease-out forwards;
+    text-align: justify; /* justificado */
+}
+
+.box ul {
+    list-style: disc inside; /* estilo de lista tradicional */
+    margin-left: 20px;
+}
+
+/* IMAGENS DAS ODS */
+.ods-imagens {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.ods-imagens img {
+    display: inline-block;
+    margin: 0 20px;
+    width: 180px; /* maior */
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.ods-imagens img:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* LINKS NOS TEXTOS */
+.box a {
+    color: var(--azul);
+    text-decoration: underline;
+}
+
+.box a:hover {
+    color: var(--azul);
+}
+
+/* BOX PARA O LINK FINAL */
+#veja-mais {
+    text-align: center; /* centralizado */
+    color: #333;        /* mesma cor do texto padrão */
+    font-family: var(--fonte-texto);
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+#veja-mais a {
+    color: var(--azul);
+    text-decoration: underline;
+}
+
+#veja-mais a:hover {
+    color: var(--azul);
+}
+
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    body { padding-top: 130px; }
+    .logo { width: 280px; }
+    .galeria { grid-template-columns: repeat(2, 5fr); }
+}
+@media (max-width: 520px) {
+    body { padding-top: 120px; }
+    .logo { width: 240px; }
+    .galeria { grid-template-columns: 5fr; }
+}
+
+/* ================================
+   FOOTER
+================================ */
+footer {
+    background: var(--azul);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 40px auto 60px;
+    text-align: center;
+    font-size: 16px;
+}

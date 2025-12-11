@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+:root {
+    --bg-site: #fafafa;
+
+    --vermelho: #ff2b2b;
+    --vermelho-escuro: #b30000;
+    --vermelho-claro: #ff5a5a;
+    --vinho: #8b0000;
+
+    --rosa: #ff63a5;
+    --azul: #6bb0ff;
+    --dourado: #ffc469;
+    --roxo: #7e57c2;
+    --negro: #000;
+    --laranja: #ff8b43;
+    --verde: #2fbf71;
+
+    --fonte-titulo: 'Berkshire Swash', serif;
+    --fonte-texto: 'Times New Roman', serif;
+}
+
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    background: var(--bg-site);
+    font-family: var(--fonte-texto);
+    color: #333;
+}
+
+body { padding-top: 160px; }
+
+/* HEADER FIXO — DEGRADÊ VERMELHO */
+header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 25px 0 15px;
+
+    background: linear-gradient(to right,
+        #b30000,
+        #ff2b2b,
+        #ff5a5a,
+        #b30000
+    );
+
+    z-index: 4000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: top 0.35s ease;
+}
+
+/* Garantir que o link da logo só envolva a imagem */
+header > a {
+    display: inline-block; /* só ocupa a imagem */
+    width: auto;           /* não expande */
+    height: auto;
+}
+
+/* Garantir que a imagem não ocupe espaço extra */
+header .logo {
+    display: block;
+    width: 320px;  /* mantém o tamanho que você já usa */
+    margin: 0 auto;
+}
+
+
+header.hide { top: -200px; }
+
+/* LOGO */
+.logo {
+    width: 320px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Checkbox invisível */
+#menu-toggle {
+    position: absolute;
+    width: 1px; height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* MENU HAMBÚRGUER */
+header > label.hamburger {
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    cursor: pointer;
+    width: 40px;
+    height: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    z-index: 4500;
+}
+
+header label.hamburger span {
+    height: 4px;
+    background: white;
+    border-radius: 2px;
+    transition: background 0.35s;
+}
+
+/* Muda só a cor dos tracinhos */
+#menu-toggle:checked + label.hamburger span {
+    background: #000 !important;
+}
+
+/* MENU LATERAL */
+header nav {
+    position: fixed !important;
+    right: -280px;
+    top: 0 !important;
+    height: 100vh;
+    width: 280px;
+    background: #fff;
+
+    box-shadow: -2px 0 10px rgba(0,0,0,0.15);
+    transition: right 0.3s ease;
+
+    padding: 24px 20px;
+    z-index: 4200;
+    overflow-y: auto;
+}
+
+#menu-toggle:checked ~ nav { right: 0; }
+
+/* LINKS PRINCIPAIS */
+header nav .menu {
+    list-style: none;
+}
+header nav .menu > li {
+    margin-bottom: 18px;
+}
+
+header nav .menu > li > a {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 8px;
+    border-radius: 8px;
+    color: #111 !important;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+header nav .menu > li > a:hover {
+    background: #f5f5f5;
+}
+
+/* SETINHAS */
+details summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    padding-left: 22px;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 8px;
+    border-radius: 8px;
+}
+
+details summary::before {
+    content: "▼";
+    font-size: 15px;
+    position: absolute;
+    left: 0;
+    top: 6px;
+    transition: transform 0.25s ease;
+}
+
+details[open] summary::before {
+    transform: rotate(180deg);
+}
+
+header nav details ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+header nav details ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 6px 8px;
+    display: inline-block;
+    border-radius: 6px;
+}
+
+header nav details ul li a:hover {
+    background: #f0f0f0;
+}
+
+/* ================================
+   CORES DOS LINKS NO MENU (fix)
+================================ */
+header nav a[href*="outubro"]          { color: var(--rosa); }
+header nav a[href*="novembro_azul"]    { color: var(--azul); }
+header nav a[href*="novembro_dourado"] { color: var(--dourado); }
+header nav a[href*="novroxo"]          { color: var(--roxo); }
+header nav a[href*="novnegro"]         { color: var(--negro); }
+header nav a[href*="dezembro_laranja"] { color: var(--laranja); }
+header nav a[href*="dezverde"]         { color: var(--verde); }
+header nav a[href*="dezembro_vermelho"]{ color: var(--vermelho-escuro); }
+
+/* ================================
+   CORES DOS SUMMARY / TÍTULOS DOS GRUPOS
+================================ */
+details summary:has(a[href*="outubro"])          { color: var(--rosa); }
+details summary:has(a[href*="novembro_azul"])    { color: var(--azul); }
+details summary:has(a[href*="novembro_dourado"]) { color: var(--dourado); }
+details summary:has(a[href*="novroxo"])          { color: var(--roxo); }
+details summary:has(a[href*="novnegro"])         { color: var(--negro); }
+details summary:has(a[href*="dezembro_laranja"]) { color: var(--laranja); }
+details summary:has(a[href*="dezverde"])         { color: var(--verde); }
+details summary:has(a[href*="dezembro_vermelho"]){ color: var(--vermelho-escuro); }
+
+/* Barra de tópicos mais próxima do header */
+.topicos {
+    position: fixed;
+    top: 150px; /* 10px mais pra cima que antes */
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 12px 0;
+    z-index: 3999;
+    transition: top 0.35s ease;
+}
+
+
+header.hide + .topicos {
+    top: -200px;
+}
+
+.topicos ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.topicos ul li a {
+    font-family: var(--fonte-titulo);
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--vermelho-escuro);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.topicos ul li a:hover {
+    background: var(--vermelho-escuro);
+    color: white;
+}
+
+/* ANIMAÇÃO */
+@keyframes subir {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+/* TÍTULO PRINCIPAL */
+.titulo-principal {
+    font-family: var(--fonte-titulo);
+    font-size: 52px;
+    color: var(--vermelho-escuro);
+    text-align: center;
+
+    display: block;
+    width: 100%;
+
+    margin: 130px auto 40px;
+    padding: 0 20px;
+
+    max-width: 1000px;
+    line-height: 1.2;
+}
+
+/* IMAGEM DESTAQUE */
+.destaque {
+    display: block;
+    margin: 0 auto 40px;
+    max-width: 430px;
+    width: 90%;
+
+    border-radius: 14px;
+
+    animation: subir 0.9s ease forwards;
+    opacity: 0;
+}
+
+/* BOXES */
+.box {
+    background: white;
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    animation: subir 0.6s ease forwards;
+}
+
+.box h1 {
+    font-family: var(--fonte-titulo);
+    text-align: center;
+    color: var(--vermelho-escuro);
+    margin-bottom: 18px;
+}
+
+.box p, .box li {
+    font-size: 19px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.box ul { padding-left: 20px; }
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    body { padding-top: 130px; }
+    .logo { width: 280px; }
+    .galeria { grid-template-columns: repeat(2, 5fr); }
+}
+@media (max-width: 520px) {
+    body { padding-top: 120px; }
+    .logo { width: 240px; }
+    .galeria { grid-template-columns: 5fr; }
+}
+
+/* FOOTER */
+footer {
+    background: var(--vermelho-escuro);
+    color: white;
+    padding: 18px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 40px auto 60px;
+    text-align: center;
+}
